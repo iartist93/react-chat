@@ -14,7 +14,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,6 +27,7 @@
   color: #61dafb;
 }
 
+/* Replace with breathing animation 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +35,34 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+nav {
+  background-color: #3e103f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: start;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-right: 2px rgb(136, 148, 175) solid;
+  height: 100vh;
+  width: 20%;
+}
+.channel-nav-item {
+  color: rgb(128, 127, 155);
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.active-channel {
+  color: white;
+}
+
+.nav-section-title {
+  color: white;
 }
