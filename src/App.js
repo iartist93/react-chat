@@ -1,4 +1,3 @@
-import logo from "./slack.png";
 import "./App.css";
 import Nav from "./Nav.js";
 import Members from "./Members.js";
