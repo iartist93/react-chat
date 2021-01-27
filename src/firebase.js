@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD9O76O3eNgAf5Os2SrBktGtQUVmC3ZRZI",
@@ -17,4 +18,4 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
-export { db };
+export default db;
