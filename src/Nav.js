@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import db from "./firebase.js";
+import { db } from "./firebase.js";
 
 const Nav = ({ onChannelUpdate }) => {
   const [channels, setChannels] = useState([]);

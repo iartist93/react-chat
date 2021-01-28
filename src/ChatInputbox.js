@@ -1,5 +1,5 @@
 import React from "react";
-import db from "./firebase.js";
+import { db } from "./firebase.js";
 import { useEffect, useState } from "react";
 
 const ChatInputbox = ({ active }) => {

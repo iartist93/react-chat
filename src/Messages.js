@@ -1,6 +1,9 @@
+import woody from "./woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
-import "firebase/firestore";
-import db from "./firebase.js";
+import { db } from "./firebase.js";
+// import firestore from "firebase/firestore";
+
+import firebase from "firebase/app";
 
 const Messages = ({ active }) => {
   console.log(active);
@@ -38,18 +41,20 @@ const Messages = ({ active }) => {
   return (
     <main className="App-main" ref={formRef}>
       {messages.map((message, index) => {
-        // const date = message.created_at.toDate();
-        // console.log(date);
+        const date = firebase.firestore.Timestamp.fromMillis(message.created_at)
+          .toDate()
+          .toLocaleTimeString();
+
         return (
-          <div key={index}>
-            <div className="message-user">
-              <div className="message-user-avatar" />
-              <div className="message-info">
-                {/* <span>{date}</span> */}
-                {/* <span>Ahmad</span> */}
+          <div key={index} class="message-item">
+            <img src={woody} alt={"ahmed"} className="message-avatar" />
+            <div className="message-body">
+              <div className="message-header">
+                <span class="message-author">Ahmad</span>
+                <span class="message-time">{date}</span>
               </div>
+              <p class="message-content">{message.text}</p>
             </div>
-            <p>{message.text}</p>
           </div>
         );
       })}
