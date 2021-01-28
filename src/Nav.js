@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import db from "./firebase.js";
 
-const Nav = () => {
+const Nav = ({ onChannelUpdate }) => {
   const [channels, setChannels] = useState([]);
   const [activeChannel, setActiveChannel] = useState(0);
 
@@ -34,6 +34,7 @@ const Nav = () => {
             onClick={(e) => {
               e.preventDefault();
               setActiveChannel(index);
+              onChannelUpdate(index);
             }}
           >
             #{channel.id}

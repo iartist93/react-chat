@@ -5,14 +5,22 @@ import Messages from "./Messages.js";
 import ChatInputbox from "./ChatInputbox.js";
 import ChatHeader from "./Header.js";
 
+import { useState } from "react";
+
 function App() {
+  const [activeChannel, setActiveChannel] = useState(0);
+
+  const onChannelUpdate = (index) => {
+    setActiveChannel(index);
+  };
+
   return (
     <div className="App">
-      <Nav />
+      <Nav onChannelUpdate={onChannelUpdate} />
       <section className="App-center">
-        <ChatHeader />
-        <Messages />
-        <ChatInputbox />
+        <ChatHeader active={activeChannel} />
+        <Messages active={activeChannel} />
+        <ChatInputbox active={activeChannel} />
       </section>
       <Members />
     </div>
