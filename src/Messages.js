@@ -3,8 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { db } from "./firebase.js";
 
 const Messages = ({ active }) => {
-  console.log(active);
-
   const [messages, setMessages] = useState([]);
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const formRef = useRef(null);
@@ -45,17 +43,16 @@ const Messages = ({ active }) => {
 
         return (
           <div
+            key={index}
             className={`message ${
               selectedMessageIndex !== null && selectedMessageIndex === index
                 ? "selected-message"
                 : ""
             }`}
             onMouseEnter={(e) => {
-              console.log(date);
               setSelectedMessageIndex(index);
             }}
             onMouseLeave={(e) => {
-              console.log(date);
               setSelectedMessageIndex(null);
             }}
           >
@@ -77,9 +74,9 @@ const Messages = ({ active }) => {
                     index === selectedMessageIndex ? "" : "message-time-hidden"
                   }`}
                 >
-                  {date}
+                  {date.split(" ")[0]}
                 </p>
-                <p className="message-content">{message.text}</p>
+                <div className="message-content">{message.text}</div>
               </div>
             )}
           </div>
