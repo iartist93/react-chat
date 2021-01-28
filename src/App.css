@@ -12,7 +12,7 @@ body {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .App {
@@ -37,11 +37,13 @@ h2 {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
+  font-size: 13px;
+  line-height: 1.4em;
   /* justify-content: space-between; */
 }
 
 .App-header {
-  min-height: 85px;
+  min-height: 65px;
   height: 10vh;
   display: flex;
   flex-direction: column;
@@ -59,7 +61,7 @@ h2 {
 .header-subtitle {
   display: flex;
   flex-direction: row;
-  font-size: 15px;
+  font-size: 12px;
   color: rgb(115, 114, 133);
 }
 
@@ -78,10 +80,10 @@ h2 {
   margin-right: 10px;
 }
 
-.App-main {
+.App-messages {
   justify-content: start;
   text-align: start;
-  padding-left: 20px;
+  padding-left: 0px;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100vh;
@@ -101,18 +103,19 @@ h2 {
 .aside-user-item {
   text-decoration: none;
   color: black;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .aside-user-item::before {
   content: "";
-  height: 5px;
-  width: 5px;
-  background-color: white;
-  border: 3px green solid;
+  height: 7px;
+  width: 7px;
+  background-color: green;
+  /* border: 3px green solid; */
   border-radius: 50%;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 /* Replace with breathing animation 
@@ -140,7 +143,7 @@ nav {
 
 .channel-nav-item {
   color: rgb(128, 127, 155);
-  font-size: 18px;
+  font-size: 13px;
   text-decoration: none;
   margin-top: 5px;
 }
@@ -166,30 +169,35 @@ nav {
 
 .message-input {
   border-radius: 4px;
-  border: 2px rgb(115, 114, 133) solid;
+  border: 1.2px rgb(172, 181, 202) solid;
   height: 40px;
-  width: 90%;
-  font-size: 16px;
+  width: 88%;
+  font-size: 13px;
   padding: 0 15px;
+}
+.message-input:focus {
+  /* border-color: rgb(135, 143, 160); */
+  border: 1.28px rgb(196, 204, 221) solid;
+  background-color: rgb(248, 248, 248);
+  outline: none;
 }
 
 .message-item {
   display: flex;
   flex-direction: row;
-  margin-right: 10px;
-  margin-top: 10px;
   /* background-color: blue; */
 }
 
 .message-sub-item {
-  margin-right: 10px;
-  margin-left: 25px;
+  /* margin-left: 28px; */
   /* background-color: red; */
+  display: flex;
+  flex-direction: row;
 }
 
 .message-avatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 12%;
   justify-content: center;
   align-items: center;
@@ -202,26 +210,46 @@ nav {
 }
 
 .message-header {
+  /* background-color: red; */
   margin-left: 8px;
   font-size: 14px;
-  display: flex;
-  flex-direction: row;
 }
 
 .message-author {
   font-weight: 800;
-  font-size: 1.1em;
 }
 
 .message-time {
-  padding-left: 3px;
-  font-size: 0.8em;
-  font-weight: 700;
+  padding-left: 5px;
+  font-size: 0.9em;
+  color: rgb(128, 127, 155);
+  vertical-align: baseline;
+}
+
+.message-date {
+  justify-content: center;
+  align-items: center;
+  font-size: 0.64em;
+  font-weight: 600;
   margin: auto 0;
+  min-width: 32px;
+  width: 32px;
+  visibility: visible;
   color: rgb(128, 127, 155);
 }
 
+.message-time-hidden {
+  visibility: hidden;
+}
+
 .message-content {
-  margin-top: 2px;
-  margin-left: 8px;
+  margin: inherit;
+  margin-left: 10px;
+}
+
+.message {
+  padding: 4px 20px;
+}
+.selected-message {
+  background-color: rgb(243, 243, 243);
 }

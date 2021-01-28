@@ -1,14 +1,12 @@
 import woody from "./woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import { db } from "./firebase.js";
-// import firestore from "firebase/firestore";
-
-import firebase from "firebase/app";
 
 const Messages = ({ active }) => {
   console.log(active);
 
   const [messages, setMessages] = useState([]);
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const formRef = useRef(null);
 
   ///TODO: Refactor this to use global state for all channels array
@@ -39,26 +37,51 @@ const Messages = ({ active }) => {
   }, [active, channels]);
 
   return (
-    <main className="App-main" ref={formRef}>
+    <main className="App-messages" ref={formRef}>
       {messages.map((message, index) => {
-        const date = firebase.firestore.Timestamp.fromMillis(message.created_at)
-          .toDate()
-          .toLocaleTimeString();
+        const date = message.created_at.toDate().toLocaleTimeString("en", {
+          timeStyle: "short",
+        });
 
-        return index === 0 ? (
-          <div key={index} class="message-item">
-            <img src={woody} alt={"ahmed"} className="message-avatar" />
-            <div className="message-body">
-              <div className="message-header">
-                <span class="message-author">Ahmad</span>
-                <span class="message-time">{date}</span>
+        return (
+          <div
+            className={`message ${
+              selectedMessageIndex !== null && selectedMessageIndex === index
+                ? "selected-message"
+                : ""
+            }`}
+            onMouseEnter={(e) => {
+              console.log(date);
+              setSelectedMessageIndex(index);
+            }}
+            onMouseLeave={(e) => {
+              console.log(date);
+              setSelectedMessageIndex(null);
+            }}
+          >
+            {index === 0 ? (
+              <div className="message-item" key={index}>
+                <img src={woody} alt={"ahmed"} className="message-avatar" />
+                <div className="message-body">
+                  <div className="message-header">
+                    <span className="message-author">Ahmad</span>
+                    <span className="message-time">{date}</span>
+                  </div>
+                  <p className="message-content">{message.text}</p>
+                </div>
               </div>
-              <p class="message-content">{message.text}</p>
-            </div>
-          </div>
-        ) : (
-          <div key={index} class="message-sub-item">
-            <p class="message-content">{message.text}</p>
+            ) : (
+              <div className="message-sub-item" key={index}>
+                <p
+                  className={`message-date ${
+                    index === selectedMessageIndex ? "" : "message-time-hidden"
+                  }`}
+                >
+                  {date}
+                </p>
+                <p className="message-content">{message.text}</p>
+              </div>
+            )}
           </div>
         );
       })}
