@@ -7,12 +7,11 @@ const ChatInputbox = () => {
       className="chat-messages-form"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(e.target.elements[0].value);
         db.collection("channels")
-          .doc("random")
+          .doc("development")
           .collection("messages")
           .add({
-            text: toString(e.target.elements[0].value),
+            text: e.target.elements[0].value,
             created_at: new Date(),
           });
         e.target.reset();
