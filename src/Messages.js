@@ -45,7 +45,7 @@ const Messages = ({ active }) => {
           .toDate()
           .toLocaleTimeString();
 
-        return (
+        return index === 0 ? (
           <div key={index} class="message-item">
             <img src={woody} alt={"ahmed"} className="message-avatar" />
             <div className="message-body">
@@ -55,6 +55,10 @@ const Messages = ({ active }) => {
               </div>
               <p class="message-content">{message.text}</p>
             </div>
+          </div>
+        ) : (
+          <div key={index} class="message-sub-item">
+            <p class="message-content">{message.text}</p>
           </div>
         );
       })}
