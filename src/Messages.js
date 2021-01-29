@@ -2,7 +2,7 @@ import woody from "./images/woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import useCollection from "./hooks/useCollection";
 
-const Messages = ({ channelId }) => {
+const Messages = ({ channelId, user }) => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const formRef = useRef(null);
 
@@ -43,7 +43,9 @@ const Messages = ({ channelId }) => {
                   <img src={woody} alt={"ahmed"} className="message-avatar" />
                   <div className="first-message-body">
                     <div className="first-message-header">
-                      <span className="frist-message-author">Ahmad</span>
+                      <span className="frist-message-author">
+                        {user.displayName}
+                      </span>{" "}
                       <span className="frist-message-time">{date}</span>
                     </div>
                     <p className="message-content">{message.text}</p>
