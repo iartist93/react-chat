@@ -7,7 +7,7 @@ import Messages from "./Messages.js";
 const Channel = ({ channelId }) => {
   return (
     <>
-      <div className="messages-container">
+      <div className="channel">
         <ChatHeader channelId={channelId} />
         <Messages channelId={channelId} />
         <ChatInputbox channelId={channelId} />

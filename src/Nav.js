@@ -1,25 +1,8 @@
 import { Link } from "@reach/router";
-import { useState, useEffect } from "react";
-import { db } from "./firebase.js";
+import useCollection from "./hooks/useCollection";
 
 const Nav = ({ onChannelUpdate }) => {
-  const [channels, setChannels] = useState([]);
-
-  useEffect(() => {
-    // Register new firestore collection lisnerer
-    const unsubscribe = db
-      .collection("channels")
-      .onSnapshot((collectionSnapshot) => {
-        // setChannels(collectionSnapshot.docs); //
-        let docs = [];
-        collectionSnapshot.forEach((doc) =>
-          docs.push({ ...doc.data(), id: doc.id })
-        );
-        setChannels(docs);
-      });
-    return unsubscribe;
-  }, []);
-
+  const channels = useCollection("channels");
   return (
     <nav>
       <h2 className="nav-section-title">Channels</h2>

@@ -1,13 +1,11 @@
 import React from "react";
 import { db } from "./firebase.js";
 
-const ChatInputbox = ({ channelID }) => {
-  console.log(channelID);
-
+const ChatInputbox = ({ channelId }) => {
   const handleSubmit = (e) => {
     const initalHeight = 50;
     e.preventDefault();
-    db.collection("channels").doc(channelID).collection("messages").add({
+    db.collection(`channels/${channelId}/messages`).add({
       text: e.target.value,
       created_at: new Date(),
     });
@@ -36,7 +34,7 @@ const ChatInputbox = ({ channelID }) => {
         }}
         rows="3"
         type="text"
-        placeholder={`message #${channelID}`}
+        placeholder={`message #${channelId}`}
         className="message-input"
       />
     </form>
