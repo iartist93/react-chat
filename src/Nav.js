@@ -1,9 +1,9 @@
+import { Link } from "@reach/router";
 import { useState, useEffect } from "react";
 import { db } from "./firebase.js";
 
 const Nav = ({ onChannelUpdate }) => {
   const [channels, setChannels] = useState([]);
-  const [activeChannel, setActiveChannel] = useState(0);
 
   useEffect(() => {
     // Register new firestore collection lisnerer
@@ -25,20 +25,15 @@ const Nav = ({ onChannelUpdate }) => {
       <h2 className="nav-section-title">Channels</h2>
       {channels.map((channel, index) => {
         return (
-          <a
+          <Link
             key={channel.id}
             className={`channel-nav-item ${
-              index === activeChannel ? "active-channel" : ""
+              index === 0 ? "active-channel" : ""
             }`}
-            href={`/channels/${channel.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveChannel(index);
-              onChannelUpdate(index);
-            }}
+            to={`/channel/${channel.id}`}
           >
             #{channel.id}
-          </a>
+          </Link>
         );
       })}
     </nav>

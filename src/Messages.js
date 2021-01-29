@@ -2,28 +2,15 @@ import woody from "./woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import { db } from "./firebase.js";
 
-const Messages = ({ active }) => {
+const Messages = ({ channelId }) => {
   const [messages, setMessages] = useState([]);
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const formRef = useRef(null);
 
-  ///TODO: Refactor this to use global state for all channels array
-  const [channels, setChannels] = useState([]);
-
-  useEffect(() => {
-    return db.collection("channels").onSnapshot((collectionSnapshot) => {
-      let docs = [];
-      collectionSnapshot.forEach((doc) =>
-        docs.push({ ...doc.data(), id: doc.id })
-      );
-      setChannels(docs);
-    });
-  }, []);
-
   useEffect(() => {
     return db
       .collection("channels")
-      .doc(channels[active]?.id)
+      .doc(channelId)
       .collection("messages")
       .orderBy("created_at")
       .onSnapshot((snapshot) => {
@@ -32,10 +19,10 @@ const Messages = ({ active }) => {
         setMessages(docs);
         formRef.current.scrollTo(0, formRef.current.scrollHeight);
       });
-  }, [active, channels]);
+  }, [channelId]);
 
   return (
-    <main className="App-messages" ref={formRef}>
+    <div className="App-messages" ref={formRef}>
       {messages.map((message, index) => {
         const date = message.created_at.toDate().toLocaleTimeString("en", {
           timeStyle: "short",
@@ -82,7 +69,7 @@ const Messages = ({ active }) => {
           </div>
         );
       })}
-    </main>
+    </div>
   );
 };
 

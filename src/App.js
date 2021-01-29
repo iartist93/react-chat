@@ -1,26 +1,19 @@
 import "./App.css";
 import Nav from "./Nav.js";
 import Members from "./Members.js";
-import Messages from "./Messages.js";
-import ChatInputbox from "./ChatInputbox.js";
-import ChatHeader from "./Header.js";
+import Channel from "./Channel.js";
 
-import { useState } from "react";
+import { Router, Redirect } from "@reach/router";
 
 function App() {
-  const [activeChannel, setActiveChannel] = useState(0);
-
-  const onChannelUpdate = (index) => {
-    setActiveChannel(index);
-  };
-
   return (
     <div className="App">
-      <Nav onChannelUpdate={onChannelUpdate} />
+      <Nav />
       <section className="App-center">
-        <ChatHeader active={activeChannel} />
-        <Messages active={activeChannel} />
-        <ChatInputbox active={activeChannel} />
+        <Router>
+          <Channel path="channel/:channelId" />
+          <Redirect from="/" to="channel/development" />
+        </Router>
       </section>
       <Members />
     </div>
