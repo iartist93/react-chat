@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatHeader = ({ channelId }) => {
   return (
-    <header className="App-header">
+    <header className="channel-header">
       <h2 className="header-title">#{channelId}</h2>
       <section className="header-subtitle">
         <p>🧑 4</p>

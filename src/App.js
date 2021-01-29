@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import Nav from "./Nav.js";
 import Members from "./Members.js";
 import Channel from "./Channel.js";

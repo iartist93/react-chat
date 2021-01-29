@@ -1,4 +1,4 @@
-import woody from "./woody_small.jpg";
+import woody from "./images/woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import useCollection from "./hooks/useCollection";
 
@@ -16,7 +16,7 @@ const Messages = ({ channelId }) => {
   }, [messages]);
 
   return (
-    <div className="channel-messages">
+    <div className="channel-messages-wrapper">
       <div className="messages-container" ref={formRef}>
         {messages.map((message, index) => {
           const date = message.created_at.toDate().toLocaleTimeString("en", {
@@ -26,7 +26,7 @@ const Messages = ({ channelId }) => {
           return (
             <div
               key={index}
-              className={`message ${
+              className={`message-wrapper ${
                 selectedMessageIndex !== null && selectedMessageIndex === index
                   ? "selected-message"
                   : ""
@@ -39,23 +39,23 @@ const Messages = ({ channelId }) => {
               }}
             >
               {index === 0 ? (
-                <div className="message-item" key={index}>
+                <div className="first-message-item" key={index}>
                   <img src={woody} alt={"ahmed"} className="message-avatar" />
-                  <div className="message-body">
-                    <div className="message-header">
-                      <span className="message-author">Ahmad</span>
-                      <span className="message-time">{date}</span>
+                  <div className="first-message-body">
+                    <div className="first-message-header">
+                      <span className="frist-message-author">Ahmad</span>
+                      <span className="frist-message-time">{date}</span>
                     </div>
                     <p className="message-content">{message.text}</p>
                   </div>
                 </div>
               ) : (
-                <div className="message-sub-item" key={index}>
+                <div className="sub-message-item" key={index}>
                   <p
                     className={`message-date ${
                       index === selectedMessageIndex
                         ? ""
-                        : "message-time-hidden"
+                        : "sub-message-time-hidden"
                     }`}
                   >
                     {date.split(" ")[0]}

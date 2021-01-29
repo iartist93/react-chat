@@ -1,5 +1,5 @@
 import React from "react";
-import { db } from "./firebase.js";
+import { db } from "./firebase/firebase.js";
 
 const ChatInputbox = ({ channelId }) => {
   const handleSubmit = (e) => {
@@ -14,8 +14,7 @@ const ChatInputbox = ({ channelId }) => {
   };
 
   return (
-    // <form className="chat-messages-form" onSubmit={handleSubmit}>
-    <form className="chat-messages-form" onSubmit={handleSubmit}>
+    <form className="messages-form" onSubmit={handleSubmit}>
       <textarea
         onKeyPress={(e) => {
           if (e.key === "Enter" && !e.shiftKey) handleSubmit(e);

@@ -42,7 +42,7 @@ h2 {
   line-height: 1.4em;
 }
 
-.App-header {
+.channel-header {
   display: flex;
   flex-shrink: 0;
   height: 80px;
@@ -159,7 +159,7 @@ nav {
   height: 100vh;
 }
 
-.channel-messages {
+.channel-messages-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,7 +175,7 @@ nav {
   overflow-x: hidden;
 }
 
-.chat-messages-form {
+.messages-form {
   display: flex;
   flex-direction: column-reverse;
   justify-content: end;
@@ -214,12 +214,12 @@ nav {
   outline: none;
 }
 
-.message-item {
+.first-message-item {
   display: flex;
   flex-direction: row;
 }
 
-.message-sub-item {
+.sub-message-item {
   display: flex;
   flex-direction: row;
 }
@@ -238,17 +238,17 @@ nav {
   width: 100%;
 }
 
-.message-header {
+.first-message-header {
   /* background-color: red; */
   margin-left: 8px;
   font-size: 15px;
 }
 
-.message-author {
+.frist-message-author {
   font-weight: 800;
 }
 
-.message-time {
+.first-message-time {
   padding-left: 5px;
   font-size: 0.9em;
   color: rgb(128, 127, 155);
@@ -268,7 +268,7 @@ nav {
   line-height: 1.6em;
 }
 
-.message-time-hidden {
+.sub-message-time-hidden {
   visibility: hidden;
 }
 
@@ -278,7 +278,7 @@ nav {
   white-space: pre-wrap;
 }
 
-.message {
+.message-wrapper {
   padding: 4px 20px;
 }
 

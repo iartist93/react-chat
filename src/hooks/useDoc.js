@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebase.js";
+import { db } from "../firebase/firebase.js";
 
 /**
  *  subscribe to a firebase docuemnt
