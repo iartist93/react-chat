@@ -1,11 +1,9 @@
-import userAvatar from "./images/woody_small.jpg";
-
 import { Link } from "@reach/router";
 import useCollection from "./hooks/useCollection";
 
 import { firebase } from "./firebase/firebase";
 
-const Nav = ({ user }) => {
+const Nav = ({ user, showNav }) => {
   const channels = useCollection("channels");
 
   const handleLogout = (e) => {
@@ -14,7 +12,7 @@ const Nav = ({ user }) => {
   };
 
   return (
-    <div className="nav-wrapper">
+    <div className={`nav-wrapper ${showNav && "nav-visible"}`}>
       <div className="nav-user-info">
         <img className="nav-user-avatar" src={user.photoURL} alt="" />
         <div className="nav-user-col">

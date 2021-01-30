@@ -26,15 +26,10 @@ h2 {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-center {
+.channel-wrapper {
   display: flex;
   flex-direction: column;
+  flex: 1;
   overflow: hidden;
   width: 59.99%;
   font-size: 15px;
@@ -51,11 +46,31 @@ h2 {
   justify-content: start;
   font-size: calc(10px + 2vmin);
   border-bottom: 2px rgb(226, 228, 230) solid;
-  padding-left: 20px;
+}
+
+.channel-title-wrapper {
+  display: flex;
+  align-items: flex-end;
+  padding: 5px;
+  /* align-content: center; */
+}
+
+.channel-drawer-icon {
+  /* background-color: blue; */
+  margin-right: 10px;
+}
+
+.channel-drawer-icon > div {
+  width: 20px;
+  height: 3px;
+  background-color: rgb(32, 27, 32);
+  margin: 3px 2px;
 }
 
 .header-title {
   margin-bottom: 0px;
+  padding-left: 17px;
+  /* background-color: red; */
 }
 
 .header-subtitle {
@@ -63,6 +78,7 @@ h2 {
   flex-direction: row;
   font-size: 15px;
   color: rgb(115, 114, 133);
+  padding-left: 20px;
 }
 
 .channel-topic {
@@ -80,11 +96,20 @@ h2 {
   margin-right: 10px;
 }
 
-.App-aside {
-  width: 19.99%;
+/****************************************
+* Members Section
+*/
+
+.channel-members-wrapper {
+  flex-basis: 250px;
   display: flex;
   flex-direction: column;
   border-left: 2px rgb(226, 228, 230) solid;
+}
+
+.channel-members {
+  display: flex;
+  flex-direction: column;
   text-align: start;
   justify-content: start;
   padding-left: 20px;
@@ -109,18 +134,9 @@ h2 {
   vertical-align: middle;
 }
 
-/* Replace with breathing animation 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 /****************************
-/* nav */
+/* Nav Section 
+*/
 
 .nav-wrapper {
   background-color: #3e103f;
@@ -130,7 +146,8 @@ h2 {
   text-align: start;
   border-right: 2px rgb(136, 148, 175) solid;
   height: 100vh;
-  width: 250px;
+  flex-basis: 250px;
+  transition: all 0.5s ease-in-out;
 }
 
 nav {
@@ -207,6 +224,10 @@ nav {
   overflow: hidden;
 }
 
+.message-wrapper {
+  padding: 4px 20px;
+}
+
 .messages-container {
   min-height: 0;
   text-align: start;
@@ -257,6 +278,7 @@ nav {
 .first-message-item {
   display: flex;
   flex-direction: row;
+  padding-top: 10px;
 }
 
 .sub-message-item {
@@ -279,9 +301,7 @@ nav {
 }
 
 .first-message-header {
-  /* background-color: red; */
   margin-left: 8px;
-  font-size: 15px;
 }
 
 .frist-message-author {
@@ -315,10 +335,7 @@ nav {
   margin: inherit;
   margin-left: 10px;
   white-space: pre-wrap;
-}
-
-.message-wrapper {
-  padding: 4px 20px;
+  font-size: 1.05em;
 }
 
 .selected-message {
@@ -349,4 +366,45 @@ nav {
 
 .google-signin-button {
   width: 50%;
+}
+
+/**********************************
+* Media Queries 
+*/
+
+@media screen and (max-width: 420px) {
+  .nav-wrapper {
+    position: absolute;
+    left: -200px;
+  }
+
+  .nav-visible {
+    left: 0;
+  }
+
+  .channel-members-wrapper {
+    position: fixed;
+    right: -500px;
+  }
+
+  .channel-drawer-icon {
+    visibility: visible;
+  }
+
+  .channel-drawer-icon > div {
+    width: 18px;
+    height: 3px;
+    background-color: rgb(32, 27, 32);
+    margin: 3px 2px;
+  }
+
+  .header-title {
+    padding-left: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }

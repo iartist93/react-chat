@@ -3,7 +3,7 @@ import useCollection from "../hooks/useCollection";
 import FirstMessage from "./FirstMessage";
 import SubMessage from "./SubMessage";
 
-const Messages = ({ channelId }) => {
+const Messages = ({ channelId, onDrawerClicked }) => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const formRef = useRef(null);
 
@@ -17,7 +17,12 @@ const Messages = ({ channelId }) => {
   }, [messages]);
 
   return (
-    <div className="channel-messages-wrapper">
+    <div
+      className="channel-messages-wrapper"
+      onClick={() => {
+        onDrawerClicked(false);
+      }}
+    >
       <div className="messages-container" ref={formRef}>
         {messages.map((message, index) => {
           const prevMessage = messages[index - 1];

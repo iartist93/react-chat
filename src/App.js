@@ -30,14 +30,20 @@ const useAuth = () => {
 function App() {
   const authUser = useAuth();
 
+  const [showNav, setShowNav] = useState(false);
+
   return (
     <div className="App">
       {authUser ? (
         <>
-          <Nav user={authUser} />
-          <section className="App-center">
+          <Nav user={authUser} showNav={showNav} />
+          <section className="channel-wrapper">
             <Router>
-              <Channel path="channel/:channelId" user={authUser} />
+              <Channel
+                path="channel/:channelId"
+                user={authUser}
+                onDrawerClicked={setShowNav}
+              />
               <Redirect from="/" to="channel/development" />
             </Router>
           </section>
