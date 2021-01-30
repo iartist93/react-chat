@@ -119,24 +119,64 @@ h2 {
   }
 } */
 
-nav {
+/****************************
+/* nav */
+
+.nav-wrapper {
   background-color: #3e103f;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: start; */
   text-align: start;
-  padding-left: 10px;
-  padding-top: 10px;
   border-right: 2px rgb(136, 148, 175) solid;
   height: 100vh;
-  width: 19.99%;
+  width: 250px;
+}
+
+nav {
+  padding-left: 10px;
+  /* padding-top: 5px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-user-info {
+  display: flex;
+  direction: row;
+  align-items: flex-start;
+  padding: 10px 10px;
+  border-bottom: 2px rgb(84, 71, 92) solid;
+}
+
+.nav-user-avatar {
+  border-radius: 6px;
+  width: 50px;
+  height: auto;
+}
+
+.nav-user-col {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.nav-user-logout {
+  text-decoration: none;
+  color: rgb(146, 127, 153);
+  padding-top: 3px;
 }
 
 .channel-nav-item {
-  color: rgb(128, 127, 155);
+  color: rgb(128, 126, 158);
   font-size: 15px;
   text-decoration: none;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .active-channel {
@@ -288,19 +328,25 @@ nav {
 /**************************
 // Sigin Page */
 
-.app-sigin-wrapper {
+.app-signin-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245, 245, 245);
 }
-.sigin-card {
+.signin-card {
   float: 1;
-  width: 50vw;
-  height: 50vh;
+  width: 500px;
+  height: 500px;
   background-color: white;
   border: 2px black solid;
   border-radius: 10px;
+}
+
+.google-signin-button {
+  width: 50%;
 }

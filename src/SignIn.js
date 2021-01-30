@@ -19,14 +19,20 @@ const SiginIn = () => {
   };
 
   return (
-    <div className="app-sigin-wrapper">
-      <div className="sigin-card">
+    <div className="app-signin-wrapper">
+      <div className="signin-header">
+        <h1>SignIn Into ReactChat</h1>
+      </div>
+      <div className="signin-card">
+        <h2> Continue With Google </h2>
         <img
           onClick={handleSignIn}
-          className="google-singin-button"
+          className="google-signin-button"
           src={googleSignIn}
           alt="sigin"
         />
+        <hr />
+        <h2> Signin With Email </h2>
         <div
           className="signin-error-message"
           style={{

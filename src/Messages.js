@@ -1,4 +1,3 @@
-import woody from "./images/woody_small.jpg";
 import React, { useEffect, useRef, useState } from "react";
 import useCollection from "./hooks/useCollection";
 
@@ -40,7 +39,11 @@ const Messages = ({ channelId, user }) => {
             >
               {index === 0 ? (
                 <div className="first-message-item" key={index}>
-                  <img src={woody} alt={"ahmed"} className="message-avatar" />
+                  <img
+                    src={user.photoURL}
+                    alt={"ahmed"}
+                    className="message-avatar"
+                  />
                   <div className="first-message-body">
                     <div className="first-message-header">
                       <span className="frist-message-author">

@@ -11,7 +11,7 @@ import { firebase } from "./firebase/firebase.js";
 const useAuth = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(async (siginedInUser) => {
+    return firebase.auth().onAuthStateChanged((siginedInUser) => {
       if (siginedInUser) setUser(siginedInUser);
       else setUser(null);
     });
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       {authUser ? (
         <>
-          <Nav />
+          <Nav user={authUser} />
           <section className="App-center">
             <Router>
               <Channel path="channel/:channelId" user={authUser} />
