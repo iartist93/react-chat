@@ -6,14 +6,22 @@ import SiginIn from "./SignIn";
 
 import { Router, Redirect } from "@reach/router";
 import { useState, useEffect } from "react";
-import { firebase } from "./firebase/firebase.js";
+import { db, firebase } from "./firebase/firebase.js";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((siginedInUser) => {
-      if (siginedInUser) setUser(siginedInUser);
-      else setUser(null);
+      if (siginedInUser) {
+        const userObject = {
+          uid: siginedInUser.uid,
+          displayName: siginedInUser.displayName,
+          photoURL: siginedInUser.photoURL,
+          email: siginedInUser.email,
+        };
+        db.collection("users").doc(siginedInUser.uid).set(userObject);
+        setUser(userObject);
+      } else setUser(null);
     });
   }, []);
   return user;
@@ -22,7 +30,6 @@ const useAuth = () => {
 function App() {
   const authUser = useAuth();
 
-  console.log(authUser);
   return (
     <div className="App">
       {authUser ? (

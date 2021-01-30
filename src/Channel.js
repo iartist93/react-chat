@@ -2,7 +2,7 @@ import React from "react";
 
 import ChatInputbox from "./ChatInputbox.js";
 import ChatHeader from "./Header.js";
-import Messages from "./Messages.js";
+import Messages from "./messages/Messages.js";
 
 const Channel = ({ channelId, user }) => {
   return (
@@ -10,7 +10,7 @@ const Channel = ({ channelId, user }) => {
       <div className="channel">
         <ChatHeader channelId={channelId} />
         <Messages channelId={channelId} user={user} />
-        <ChatInputbox channelId={channelId} />
+        <ChatInputbox channelId={channelId} user={user} />
       </div>
     </>
   );

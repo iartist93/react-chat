@@ -13,7 +13,6 @@ const useCollection = (collectionName, orderbyField) => {
     let collectioneRef = db.collection(collectionName);
 
     if (orderbyField) {
-      console.log(`In orderbyField ${orderbyField}`);
       collectioneRef = collectioneRef.orderBy(orderbyField);
     }
 

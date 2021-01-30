@@ -1,11 +1,12 @@
 import React from "react";
 import { db } from "./firebase/firebase.js";
 
-const ChatInputbox = ({ channelId }) => {
+const ChatInputbox = ({ channelId, user }) => {
   const handleSubmit = (e) => {
     const initalHeight = 50;
     e.preventDefault();
     db.collection(`channels/${channelId}/messages`).add({
+      author: db.doc(`users/${user.uid}`),
       text: e.target.value,
       created_at: new Date(),
     });

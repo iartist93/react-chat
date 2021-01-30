@@ -10,10 +10,8 @@ const SiginIn = () => {
   const handleSignIn = async () => {
     try {
       const googleProvider = new firebase.auth.GoogleAuthProvider();
-      const result = await firebase.auth().signInWithPopup(googleProvider);
-      console.log(result.user);
+      await firebase.auth().signInWithPopup(googleProvider);
     } catch (error) {
-      console.log(error);
       setSignInError(error);
     }
   };
