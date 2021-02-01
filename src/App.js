@@ -9,7 +9,8 @@ import { useState, useEffect } from "react";
 import { db, firebase } from "./firebase/firebase.js";
 
 const useAuth = () => {
-  const [user, setUser] = useState(null);
+  const currentUser = firebase.auth().currentUser;
+  const [user, setUser] = useState(currentUser);
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((siginedInUser) => {
       if (siginedInUser) {
@@ -20,7 +21,7 @@ const useAuth = () => {
           email: siginedInUser.email,
         };
         db.collection("users").doc(siginedInUser.uid).set(userObject);
-        setUser(userObject);
+        setUser(userObject, { merge: true });
       } else setUser(null);
     });
   }, []);
@@ -29,7 +30,6 @@ const useAuth = () => {
 
 function App() {
   const authUser = useAuth();
-
   const [showNav, setShowNav] = useState(false);
 
   return (

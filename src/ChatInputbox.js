@@ -3,11 +3,14 @@ import { db } from "./firebase/firebase.js";
 
 const ChatInputbox = ({ channelId, user }) => {
   const handleSubmit = (e) => {
+    const message = e.target.value.trim();
+    if (message.length === 0) return;
+
     const initalHeight = 50;
     e.preventDefault();
     db.collection(`channels/${channelId}/messages`).add({
       author: db.doc(`users/${user.uid}`),
-      text: e.target.value,
+      text: message,
       created_at: new Date(),
     });
     e.target.value = "";

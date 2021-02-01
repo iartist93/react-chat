@@ -1,18 +1,22 @@
 import googleSignIn from "./images/google/2x/btn_google_signin_dark_normal_web@2x.png";
-
 import React from "react";
 import { firebase } from "./firebase/firebase.js";
 import { useState } from "react";
 
 const SiginIn = () => {
   const [signInError, setSignInError] = useState(null);
+  let isProcessing = false;
 
   const handleSignIn = async () => {
     try {
-      const googleProvider = new firebase.auth.GoogleAuthProvider();
-      await firebase.auth().signInWithPopup(googleProvider);
+      if (!isProcessing) {
+        isProcessing = true;
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        await firebase.auth().signInWithPopup(googleProvider);
+        isProcessing = false;
+      }
     } catch (error) {
-      setSignInError(error);
+      setSignInError(error.message);
     }
   };
 
@@ -38,7 +42,7 @@ const SiginIn = () => {
             color: "red",
           }}
         >
-          {signInError}
+          {signInError} Please try again.
         </div>
       </div>
     </div>

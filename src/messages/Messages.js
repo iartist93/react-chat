@@ -8,7 +8,7 @@ const Messages = ({ channelId }) => {
     `channels/${channelId}/messages`,
     "created_at"
   );
-
+  console.log(messages.length);
   const messagesScrollRef = useRef();
 
   useEffect(() => {
@@ -16,18 +16,12 @@ const Messages = ({ channelId }) => {
     scrollNode.scrollTo({
       top: scrollNode.scrollHeight,
     });
-    console.log(`Effect : ${scrollNode.scrollHeight}`);
   });
 
   return (
     <div className="channel-messages-wrapper">
-      <div
-        className="messages-container"
-        ref={messagesScrollRef}
-        onScroll={(e) => console.log(e.target.scrollHeight)}
-      >
+      <div className="messages-container" ref={messagesScrollRef}>
         {messages.map((message, index) => {
-          console.log("Messages");
           const prevMessage = messages[index - 1];
           const showAvatar = getShowAvatar(prevMessage, message);
           return (
