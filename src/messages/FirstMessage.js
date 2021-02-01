@@ -9,11 +9,18 @@ const FirstMessage = ({ message }) => {
   const [author, setAuthor] = useState(null);
 
   useEffect(() => {
+    let isComponentMounted = true;
     db.doc(message.author.path)
       .get()
       .then((user) => {
-        setAuthor(user.data());
+        // ensure the component is still mounted before any side effect of the component
+        if (isComponentMounted) {
+          setAuthor(user.data());
+        }
       });
+    return () => {
+      isComponentMounted = false;
+    };
   }, [message.author]);
 
   return (

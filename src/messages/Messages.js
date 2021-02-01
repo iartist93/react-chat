@@ -1,64 +1,58 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import useCollection from "../hooks/useCollection";
-import FirstMessage from "./FirstMessage";
-import SubMessage from "./SubMessage";
 
-const Messages = ({ channelId, onDrawerClicked }) => {
-  const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
-  const formRef = useRef(null);
+import Message from "./Message";
 
+const Messages = ({ channelId }) => {
   const messages = useCollection(
     `channels/${channelId}/messages`,
     "created_at"
   );
 
+  const messagesScrollRef = useRef();
+
   useEffect(() => {
-    formRef.current.scrollTo(0, formRef.current.scrollHeight);
-  }, [messages]);
+    const scrollNode = messagesScrollRef.current;
+    scrollNode.scrollTo({
+      top: scrollNode.scrollHeight,
+    });
+    console.log(`Effect : ${scrollNode.scrollHeight}`);
+  });
 
   return (
-    <div
-      className="channel-messages-wrapper"
-      onClick={() => {
-        onDrawerClicked(false);
-      }}
-    >
-      <div className="messages-container" ref={formRef}>
+    <div className="channel-messages-wrapper">
+      <div
+        className="messages-container"
+        ref={messagesScrollRef}
+        onScroll={(e) => console.log(e.target.scrollHeight)}
+      >
         {messages.map((message, index) => {
+          console.log("Messages");
           const prevMessage = messages[index - 1];
-          const isFirstMessage =
-            !prevMessage || message.author.id !== prevMessage.author.id;
-
+          const showAvatar = getShowAvatar(prevMessage, message);
           return (
-            <div
+            <Message
               key={index}
-              className={`message-wrapper ${
-                selectedMessageIndex !== null && selectedMessageIndex === index
-                  ? "selected-message"
-                  : ""
-              }`}
-              onMouseEnter={(e) => {
-                setSelectedMessageIndex(index);
-              }}
-              onMouseLeave={(e) => {
-                setSelectedMessageIndex(null);
-              }}
-            >
-              {isFirstMessage ? (
-                <FirstMessage message={message} />
-              ) : (
-                <SubMessage
-                  message={message}
-                  index={index}
-                  selectedMessageIndex={selectedMessageIndex}
-                />
-              )}
-            </div>
+              message={message}
+              index={index}
+              showAvatar={showAvatar}
+            />
           );
         })}
       </div>
     </div>
   );
 };
+
+function getShowAvatar(previousMessage, currentMessage) {
+  const isFirst = !previousMessage;
+  if (isFirst) {
+    return true;
+  }
+
+  const isSameAuthor = currentMessage.author.id !== previousMessage.author.id;
+
+  return isSameAuthor;
+}
 
 export default Messages;
