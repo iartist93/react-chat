@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import isSameDay from "date-fns/isSameDay";
 import useCollection from "../hooks/useCollection";
-
 import Message from "./Message";
+import { format } from "date-fns";
 
 const Messages = ({ channelId }) => {
   const messages = useCollection(
@@ -24,13 +25,25 @@ const Messages = ({ channelId }) => {
         {messages.map((message, index) => {
           const prevMessage = messages[index - 1];
           const showAvatar = getShowAvatar(prevMessage, message);
+          const showDay = getShowDay(prevMessage, message);
+          const day = format(message.created_at.toDate(), "EEEE, MMMM do");
           return (
-            <Message
-              key={index}
-              message={message}
-              index={index}
-              showAvatar={showAvatar}
-            />
+            <>
+              {showDay && (
+                <div className="message-day-seperator">
+                  <div></div>
+                  <p> {day} </p>
+                  <div></div>
+                </div>
+              )}
+              <Message
+                key={index}
+                message={message}
+                index={index}
+                showAvatar={showAvatar}
+                showDay={showDay}
+              />
+            </>
           );
         })}
       </div>
@@ -38,15 +51,32 @@ const Messages = ({ channelId }) => {
   );
 };
 
+function getShowDay(previousMessage, currentMessage) {
+  if (!previousMessage) return true;
+
+  const isSame = isSameDay(
+    previousMessage.created_at.toDate(),
+    currentMessage.created_at.toDate()
+  );
+  console.log(isSame);
+
+  return !isSame;
+}
+
 function getShowAvatar(previousMessage, currentMessage) {
   const isFirst = !previousMessage;
-  if (isFirst) {
-    return true;
-  }
+  if (isFirst) return true;
 
   const isSameAuthor = currentMessage.author.id !== previousMessage.author.id;
+  if (isSameAuthor) return true;
 
-  return isSameAuthor;
+  // if time passed > 5 mintues
+  const isLargeTimeGap =
+    currentMessage.created_at.seconds - previousMessage.created_at.seconds >
+    200;
+  if (isLargeTimeGap) return true;
+
+  return false;
 }
 
 export default Messages;

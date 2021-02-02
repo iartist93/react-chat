@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FirstMessage from "./FirstMessage";
 import SubMessage from "./SubMessage";
 
-const Message = ({ message, index, showAvatar }) => {
+const Message = ({ message, index, showAvatar, showDay }) => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const isSelected = index === selectedMessageIndex;
 
@@ -21,7 +21,7 @@ const Message = ({ message, index, showAvatar }) => {
       }}
     >
       {showAvatar ? (
-        <FirstMessage message={message} />
+        <FirstMessage message={message} showDay={showDay} />
       ) : (
         <SubMessage message={message} index={index} isSelected={isSelected} />
       )}

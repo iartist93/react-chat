@@ -45,7 +45,7 @@ h2 {
 .channel-header {
   display: flex;
   flex-shrink: 0;
-  height: 80px;
+  height: 90px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
@@ -347,6 +347,32 @@ nav {
 
 .selected-message {
   background-color: rgb(243, 243, 243);
+}
+
+.message-day-seperator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: red; */
+  margin: 0;
+  padding: 0;
+}
+
+.message-day-seperator > div {
+  flex: 1;
+  height: 0.05rem;
+  background-color: rgb(211, 211, 211);
+  border-radius: 3px;
+}
+.message-day-seperator > p {
+  padding: 3px 20px;
+  font-weight: 700;
+  font-size: 0.9em;
+  color: rgb(85, 85, 85);
+  border-radius: 40px;
+  border: 1px rgb(211, 211, 211) solid;
+  box-shadow: -1px 1px 7px rgb(233, 233, 233);
+  margin: 8px auto;
 }
 
 /**************************
