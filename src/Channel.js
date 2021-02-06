@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import ChatInputbox from "./ChatInputbox.js";
 import ChatHeader from "./Header.js";
 import Messages from "./messages/Messages.js";
+import { db } from "./firebase/firebase.js";
 
 const Channel = ({ channelId, user, onDrawerClicked }) => {
+  useEffect(() => {
+    console.log(user);
+
+    // update the user document with the joined channels
+    db.doc(`users/${user.uid}`).update({
+      [`channels.${channelId}`]: true,
+    });
+  }, [channelId, user]);
+
   return (
     <>
       <div

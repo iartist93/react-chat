@@ -4,7 +4,7 @@ import useCollection from "../hooks/useCollection";
 import Message from "./Message";
 import { format } from "date-fns";
 
-const Messages = ({ channelId }) => {
+const Messages = ({ channelId, user }) => {
   const messages = useCollection(
     `channels/${channelId}/messages`,
     "created_at"
