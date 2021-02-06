@@ -63,6 +63,7 @@ h2 {
 .channel-drawer-icon {
   /* background-color: blue; */
   margin-right: 10px;
+  display: none;
 }
 
 .channel-drawer-icon > div {
@@ -421,18 +422,18 @@ nav {
   }
 
   .channel-drawer-icon {
-    visibility: visible;
+    display: inline-block;
   }
 
   .channel-drawer-icon > div {
     width: 18px;
     height: 3px;
-    background-color: rgb(32, 27, 32);
+    background-color: rgb(170, 170, 200);
     margin: 3px 2px;
   }
 
   .header-title {
-    padding-left: 5px;
+    padding-left: 0px;
   }
 }
 

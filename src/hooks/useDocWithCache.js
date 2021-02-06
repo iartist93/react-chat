@@ -31,7 +31,6 @@ const useDocWithCache = (docPath) => {
       promise = pendingCache[docPath];
     }
     promise.then((document) => {
-      console.log(document.data());
       cache[docPath] = document.data();
       if (isMounted) {
         setDoc(document.data());

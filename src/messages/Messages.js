@@ -9,19 +9,30 @@ const Messages = ({ channelId }) => {
     `channels/${channelId}/messages`,
     "created_at"
   );
-  console.log(messages.length);
+
+  const scrollAmount = useRef(0);
   const messagesScrollRef = useRef();
 
   useEffect(() => {
     const scrollNode = messagesScrollRef.current;
-    scrollNode.scrollTo({
-      top: scrollNode.scrollHeight,
-    });
+    if (getShouldScroll(scrollNode)) {
+      scrollNode.scrollTo({
+        top: scrollNode.scrollHeight,
+      });
+    }
   });
 
   return (
     <div className="channel-messages-wrapper">
-      <div className="messages-container" ref={messagesScrollRef}>
+      <div
+        className="messages-container"
+        ref={messagesScrollRef}
+        onScroll={(e) => {
+          const shouldScroll = getShouldScroll(e.target);
+          // console.log(shouldScroll);
+          scrollAmount.current = e.target.scrollTop;
+        }}
+      >
         {messages.map((message, index) => {
           const prevMessage = messages[index - 1];
           const showAvatar = getShowAvatar(prevMessage, message);
@@ -58,8 +69,6 @@ function getShowDay(previousMessage, currentMessage) {
     previousMessage.created_at.toDate(),
     currentMessage.created_at.toDate()
   );
-  console.log(isSame);
-
   return !isSame;
 }
 
@@ -77,6 +86,21 @@ function getShowAvatar(previousMessage, currentMessage) {
   if (isLargeTimeGap) return true;
 
   return false;
+}
+
+function getShouldScroll(scrollNode) {
+  const scrollHeight = scrollNode.scrollHeight;
+  const clientHeight = scrollNode.clientHeight;
+  const scrollTop = scrollNode.scrollTop;
+  const scrollBottom = scrollHeight - (scrollTop + clientHeight);
+
+  // console.log(`${scrollHeight} ${clientHeight} ${scrollTop} ${scrollBottom}`);
+
+  if (scrollBottom < 150) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export default Messages;
