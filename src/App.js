@@ -22,7 +22,7 @@ function App() {
                 user={authUser}
                 onDrawerClicked={setShowNav}
               />
-              <Redirect from="/" to="channel/development" />
+              <Redirect noThrow from="/" to="channel/development" />
             </Router>
           </div>
         </>

@@ -27,11 +27,6 @@ const Messages = ({ channelId, user }) => {
       <div
         className="messages-container"
         ref={messagesScrollRef}
-        onMouseEnter={(e) => {
-          console.log(e.target.scrollHeight);
-          console.log(e.target.clientHeight);
-          console.log(e.target.offsetHeight);
-        }}
         onScroll={(e) => {
           console.log("On Scoll");
           const shouldScroll = getShouldScroll(e.target);
@@ -45,7 +40,7 @@ const Messages = ({ channelId, user }) => {
           const showDay = getShowDay(prevMessage, message);
           const day = format(message.created_at.toDate(), "EEEE, MMMM do");
           return (
-            <>
+            <div key={index}>
               {showDay && (
                 <div className="message-day-seperator">
                   <div></div>
@@ -54,13 +49,12 @@ const Messages = ({ channelId, user }) => {
                 </div>
               )}
               <Message
-                key={index}
                 message={message}
                 index={index}
                 showAvatar={showAvatar}
                 showDay={showDay}
               />
-            </>
+            </div>
           );
         })}
       </div>
