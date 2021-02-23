@@ -30,29 +30,26 @@ h2 {
 
 .App {
   display: flex;
-  flex-direction: row;
-  height: 100vh;
 }
 
 /************************************
 * Channel
 */
 
-/* .channel-section {
+.channel-section {
   display: flex;
-  flex: 1;
   flex-direction: row;
+  flex: 1;
   height: 100vh;
   overflow: hidden;
-  background-color: red;
-} */
+}
 
 .channel-wrapper-fix {
   display: flex;
-  flex: 1;
   flex-direction: row;
-  width: 100vw;
   height: 100vh;
+  width: calc(100vw - 200px);
+  overflow: hidden;
 }
 
 .channel-main {
@@ -63,7 +60,6 @@ h2 {
   line-height: 1.4em;
   flex: 1;
   font-size: 15px;
-  background-color: blue;
 }
 
 .channel-header {
@@ -93,7 +89,6 @@ h2 {
 }
 
 .channel-drawer-icon {
-  /* background-color: blue; */
   margin-right: 10px;
   display: none;
 }
@@ -108,7 +103,6 @@ h2 {
 .header-title {
   margin-bottom: 0px;
   padding-left: 17px;
-  /* background-color: red; */
 }
 
 .header-subtitle {
@@ -139,11 +133,10 @@ h2 {
 */
 
 .channel-aside {
-  flex-basis: 350px;
   display: flex;
   flex-direction: column;
+  width: 200px;
   border-left: 2px rgb(226, 228, 230) solid;
-  background-color: green;
 }
 
 .channel-members {
@@ -190,7 +183,7 @@ h2 {
 .nav-section {
   display: flex;
   flex-direction: column;
-  flex-basis: 350px;
+  width: 200px;
   text-align: start;
   border-right: 2px rgb(136, 148, 175) solid;
   background-color: #3e103f;
