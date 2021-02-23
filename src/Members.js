@@ -2,24 +2,31 @@ import React, { useEffect } from "react";
 import useCollection from "./hooks/useCollection";
 
 const Members = ({ channelId, user }) => {
-  const members = useCollection("users", "displayName", [
+  // const members = useCollection("users", "displayName");
+
+  const members = useCollection("users", undefined, [
     `channels.${channelId}`,
     "==",
-    "true",
+    true,
   ]);
-
-  console.log(members);
 
   return (
     <div className="channel-aside">
       <div className="channel-members">
-        <div className="aside-user-item online">User 1</div>
-        <div className="aside-user-item offline">User 2</div>
-        <div className="aside-user-item offline">User 3</div>
-        <div className="aside-user-item offline">User 4</div>
+        {members.sort(sortMembers).map((member) => (
+          <div key={member.uid} className="aside-user-item online">
+            {member.displayName}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
+
+function sortMembers(a, b) {
+  if (a.displayName > b.displayName) return 1;
+  else if (a.displayName < b.displayName) return -1;
+  else return 0;
+}
 
 export default Members;

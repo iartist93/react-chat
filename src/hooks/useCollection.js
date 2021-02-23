@@ -4,10 +4,11 @@ import { db } from "../firebase/firebase.js";
 /**
  *  subscribe to a firebase collection
  * @param collectionName the collection to subscribe to
- * @returns the `collection` array with all documents
+ * @return the `collection` array with all documents
  * */
-const useCollection = (collectionName, orderbyField, where) => {
+const useCollection = (collectionName, orderbyField, where = []) => {
   const [collection, setCollection] = useState([]);
+  const [fieldName, fieldOperator, fieldValue] = where;
 
   useEffect(() => {
     let collectioneRef = db.collection(collectionName);
@@ -16,9 +17,7 @@ const useCollection = (collectionName, orderbyField, where) => {
       collectioneRef = collectioneRef.orderBy(orderbyField);
     }
 
-    if (where && where.length) {
-      console.log(where);
-      const [fieldName, fieldOperator, fieldValue] = where;
+    if (fieldName) {
       collectioneRef = collectioneRef.where(
         fieldName,
         fieldOperator,
@@ -33,7 +32,7 @@ const useCollection = (collectionName, orderbyField, where) => {
     });
 
     return unsubscribe;
-  }, [collectionName, orderbyField, where]);
+  }, [collectionName, orderbyField, fieldName, fieldOperator, fieldValue]);
 
   return collection;
 };

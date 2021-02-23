@@ -28,8 +28,7 @@ const Messages = ({ channelId, user }) => {
         className="messages-container"
         ref={messagesScrollRef}
         onScroll={(e) => {
-          console.log("On Scoll");
-          const shouldScroll = getShouldScroll(e.target);
+          // const shouldScroll = getShouldScroll(e.target);
           // console.log(shouldScroll);
           scrollAmount.current = e.target.scrollTop;
         }}

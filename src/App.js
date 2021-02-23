@@ -45,7 +45,7 @@ const useAuth = () => {
           photoURL: siginedInUser.photoURL,
           email: siginedInUser.email,
         };
-        db.collection("users").doc(siginedInUser.uid).update(userObject);
+        db.collection("users").doc(siginedInUser.uid).set(userObject);
         setUser(userObject, { merge: true });
       } else setUser(null);
     });
