@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useCollection from "./hooks/useCollection";
 
-const Members = () => {
+const Members = ({ channelId, user }) => {
+  const members = useCollection("users", "displayName", [
+    `channels.${channelId}`,
+    "==",
+    "true",
+  ]);
+
+  console.log(members);
+
   return (
-    <div className="channel-members-wrapper">
-      <aside className="channel-members">
-        <a className="aside-user-item" href="/">
-          User 1
-        </a>
-        <a className="aside-user-item" href="/">
-          User 2
-        </a>
-        <a className="aside-user-item" href="/">
-          User 3
-        </a>
-        <a className="aside-user-item" href="/">
-          User 4
-        </a>
-      </aside>
+    <div className="channel-aside">
+      <div className="channel-members">
+        <div className="aside-user-item online">User 1</div>
+        <div className="aside-user-item offline">User 2</div>
+        <div className="aside-user-item offline">User 3</div>
+        <div className="aside-user-item offline">User 4</div>
+      </div>
     </div>
   );
 };

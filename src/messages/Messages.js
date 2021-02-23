@@ -27,7 +27,13 @@ const Messages = ({ channelId, user }) => {
       <div
         className="messages-container"
         ref={messagesScrollRef}
+        onMouseEnter={(e) => {
+          console.log(e.target.scrollHeight);
+          console.log(e.target.clientHeight);
+          console.log(e.target.offsetHeight);
+        }}
         onScroll={(e) => {
+          console.log("On Scoll");
           const shouldScroll = getShouldScroll(e.target);
           // console.log(shouldScroll);
           scrollAmount.current = e.target.scrollTop;

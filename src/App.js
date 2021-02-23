@@ -1,12 +1,37 @@
 import "./styles/App.css";
 import Nav from "./Nav.js";
-import Members from "./Members.js";
 import Channel from "./Channel.js";
 import SiginIn from "./SignIn";
-
 import { Router, Redirect } from "@reach/router";
 import { useState, useEffect } from "react";
 import { db, firebase } from "./firebase/firebase.js";
+
+function App() {
+  const authUser = useAuth();
+  const [showNav, setShowNav] = useState(false);
+
+  return (
+    <div className="App">
+      {authUser ? (
+        <>
+          <Nav user={authUser} showNav={showNav} />
+          <div className="channel-section">
+            <Router>
+              <Channel
+                path="channel/:channelId"
+                user={authUser}
+                onDrawerClicked={setShowNav}
+              />
+              <Redirect from="/" to="channel/development" />
+            </Router>
+          </div>
+        </>
+      ) : (
+        <SiginIn />
+      )}
+    </div>
+  );
+}
 
 const useAuth = () => {
   const currentUser = firebase.auth().currentUser;
@@ -20,40 +45,12 @@ const useAuth = () => {
           photoURL: siginedInUser.photoURL,
           email: siginedInUser.email,
         };
-        db.collection("users").doc(siginedInUser.uid).set(userObject);
+        db.collection("users").doc(siginedInUser.uid).update(userObject);
         setUser(userObject, { merge: true });
       } else setUser(null);
     });
   }, []);
   return user;
 };
-
-function App() {
-  const authUser = useAuth();
-  const [showNav, setShowNav] = useState(false);
-
-  return (
-    <div className="App">
-      {authUser ? (
-        <>
-          <Nav user={authUser} showNav={showNav} />
-          <section className="channel-wrapper">
-            <Router>
-              <Channel
-                path="channel/:channelId"
-                user={authUser}
-                onDrawerClicked={setShowNav}
-              />
-              <Redirect from="/" to="channel/development" />
-            </Router>
-          </section>
-          <Members />
-        </>
-      ) : (
-        <SiginIn />
-      )}
-    </div>
-  );
-}
 
 export default App;

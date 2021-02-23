@@ -4,6 +4,8 @@ body {
   font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   box-sizing: content-box;
+  width: 100vw;
+  height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -11,6 +13,7 @@ body {
   background: rgb(227, 224, 228);
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: rgb(121, 27, 116);
   border-radius: 10px;
@@ -20,26 +23,47 @@ h2 {
   font-size: 17px;
 }
 
-.App {
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-.channel-wrapper {
+.App {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/************************************
+* Channel
+*/
+
+/* .channel-section {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+  background-color: red;
+} */
+
+.channel-wrapper-fix {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+.channel-main {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-  width: 59.99%;
-  font-size: 15px;
   height: 100vh;
+  justify-content: start;
   line-height: 1.4em;
+  flex: 1;
+  font-size: 15px;
+  background-color: blue;
 }
 
 .channel-header {
@@ -51,6 +75,14 @@ h2 {
   justify-content: start;
   font-size: calc(10px + 2vmin);
   border-bottom: 2px rgb(226, 228, 230) solid;
+}
+
+.channel-messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex: 1;
+  overflow: hidden;
 }
 
 .channel-title-wrapper {
@@ -106,11 +138,12 @@ h2 {
 * Members Section
 */
 
-.channel-members-wrapper {
-  flex-basis: 250px;
+.channel-aside {
+  flex-basis: 350px;
   display: flex;
   flex-direction: column;
   border-left: 2px rgb(226, 228, 230) solid;
+  background-color: green;
 }
 
 .channel-members {
@@ -128,12 +161,22 @@ h2 {
   font-size: 15px;
 }
 
-.aside-user-item::before {
+.online::before {
   content: "";
   height: 7px;
   width: 7px;
   background-color: green;
-  /* border: 3px green solid; */
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.offline::before {
+  content: "";
+  height: 7px;
+  width: 7px;
+  background-color: rgb(148, 148, 148);
   border-radius: 50%;
   display: inline-block;
   margin-right: 5px;
@@ -141,18 +184,16 @@ h2 {
 }
 
 /****************************
-/* Nav Section 
+/* Nav Section
 */
 
-.nav-wrapper {
-  background-color: #3e103f;
-  /* display: flex;
+.nav-section {
+  display: flex;
   flex-direction: column;
-  justify-content: start; */
+  flex-basis: 350px;
   text-align: start;
   border-right: 2px rgb(136, 148, 175) solid;
-  height: 100vh;
-  flex-basis: 250px;
+  background-color: #3e103f;
   transition: all 0.5s ease-in-out;
 }
 
@@ -216,26 +257,12 @@ nav {
   left: 0;
 }
 
-.channel {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.channel-messages-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  flex: 1;
-  overflow: hidden;
-}
-
 .message-wrapper {
   padding: 4px 20px;
 }
 
 .messages-container {
-  /* min-height: 0; */
+  min-height: 0;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -416,7 +443,7 @@ nav {
     left: 0;
   }
 
-  .channel-members-wrapper {
+  .members-wrapper {
     position: fixed;
     right: -500px;
   }

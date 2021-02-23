@@ -12,7 +12,7 @@ const Nav = ({ user, showNav }) => {
   };
 
   return (
-    <div className={`nav-wrapper ${showNav && "nav-visible"}`}>
+    <div className={`nav-section ${showNav && "nav-visible"}`}>
       <div className="nav-user-info">
         <img className="nav-user-avatar" src={user.photoURL} alt="" />
         <div className="nav-user-col">

@@ -4,11 +4,10 @@ import ChatInputbox from "./ChatInputbox.js";
 import ChatHeader from "./Header.js";
 import Messages from "./messages/Messages.js";
 import { db } from "./firebase/firebase.js";
+import Members from "./Members.js";
 
 const Channel = ({ channelId, user, onDrawerClicked }) => {
   useEffect(() => {
-    console.log(user);
-
     // update the user document with the joined channels
     db.doc(`users/${user.uid}`).update({
       [`channels.${channelId}`]: true,
@@ -16,18 +15,17 @@ const Channel = ({ channelId, user, onDrawerClicked }) => {
   }, [channelId, user]);
 
   return (
-    <>
+    <div className="channel-wrapper-fix">
       <div
-        className="channel"
-        onClickCapture={() => {
-          onDrawerClicked(false);
-        }}
+        className="channel-main"
+        onClickCapture={() => onDrawerClicked(false)}
       >
         <ChatHeader channelId={channelId} onDrawerClicked={onDrawerClicked} />
         <Messages channelId={channelId} user={user} />
         <ChatInputbox channelId={channelId} user={user} />
       </div>
-    </>
+      <Members channelId={channelId} user={user} />
+    </div>
   );
 };
 
