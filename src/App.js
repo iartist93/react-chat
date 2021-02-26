@@ -4,7 +4,7 @@ import Channel from "./Channel.js";
 import SiginIn from "./SignIn";
 import { Router, Redirect } from "@reach/router";
 import { useState, useEffect } from "react";
-import { db, firebase } from "./firebase/firebase.js";
+import { db, firebase, setupUserPresense } from "./firebase/firebase.js";
 
 function App() {
   const authUser = useAuth();
@@ -47,6 +47,7 @@ const useAuth = () => {
         };
         db.collection("users").doc(siginedInUser.uid).set(userObject);
         setUser(userObject, { merge: true });
+        setupUserPresense(userObject);
       } else setUser(null);
     });
   }, []);
