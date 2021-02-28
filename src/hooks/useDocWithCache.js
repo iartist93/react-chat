@@ -27,6 +27,8 @@ const useDocWithCache = (docPath) => {
 
     let promise = pendingCache[docPath];
     if (!promise) {
+      console.log("Doc Path : ");
+      console.log(docPath);
       pendingCache[docPath] = db.doc(docPath).get();
       promise = pendingCache[docPath];
     }
